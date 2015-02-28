@@ -60,6 +60,7 @@ describe 'the person view', type: :feature do
   end
 
   describe 'email_addresses', type: :feature do
+
     before(:each) do
       person.email_addresses.create(address:'myadd@example.com')
       person.email_addresses.create(address:'diffadd@example.com')
@@ -81,6 +82,22 @@ describe 'the person view', type: :feature do
       page.click_button('Create')
       expect(current_path).to eq(person_path(person))
       expect(page).to have_content('kw@example.com')
+    end
+
+    it 'has links to edit email addresses' do
+      person.email_addresses.each do |email|
+      expect(page).to have_link("Edit", href: edit_email_address_path(email))
+      end
+    end
+
+    it 'edits a email address' do
+      email = person.email_addresses.first
+      old_address = email.address
+      first(:link, 'Edit').click
+      page.fill_in("Address", with: 'k4yy@example.com')
+      page.click_button('Update')
+      expect(current_path).to eq(person_path(person))
+      expect(page).to_not have_content(old_address)
     end
   end
 end
