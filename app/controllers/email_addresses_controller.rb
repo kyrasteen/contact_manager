@@ -1,17 +1,12 @@
 class EmailAddressesController < ApplicationController
-  before_action :set_email_address, only: [:show, :edit, :update, :destroy]
 
-  # GET /email_addresses/new
   def new
     @email_address = EmailAddress.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
   end
 
-  # GET /email_addresses/1/edit
   def edit
   end
 
-  # POST /email_addresses
-  # POST /email_addresses.json
   def create
     @email_address = EmailAddress.new(email_address_params)
 
@@ -26,8 +21,6 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /email_addresses/1
-  # PATCH/PUT /email_addresses/1.json
   def update
     respond_to do |format|
       if @email_address.update(email_address_params)
@@ -40,8 +33,6 @@ class EmailAddressesController < ApplicationController
     end
   end
 
-  # DELETE /email_addresses/1
-  # DELETE /email_addresses/1.json
   def destroy
     @email_address.destroy
     respond_to do |format|
@@ -51,12 +42,8 @@ class EmailAddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_email_address
-      @email_address = EmailAddress.find(params[:id])
-    end
+    before_action :find_resource, only: [:edit, :update, :destroy]
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def email_address_params
       params.require(:email_address).permit(:address, :contact_id, :contact_type)
     end

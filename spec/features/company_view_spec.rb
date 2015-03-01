@@ -92,7 +92,7 @@ describe 'the contact view', type: :feature do
     it 'edits a email address' do
       email = contact.email_addresses.first
       old_address = email.address
-      first(:link, 'Edit Email').click
+      first('.emails').click_link('Edit')
       page.fill_in("Address", with: 'k4yy@example.com')
       page.click_button('Update')
       expect(current_path).to eq(company_path(contact))

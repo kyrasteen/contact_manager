@@ -1,11 +1,9 @@
 class PhoneNumbersController < ApplicationController
-  before_action :set_phone_number, only: [:show, :edit, :update, :destroy]
 
   def new
     @phone_number = PhoneNumber.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
   end
 
-  # GET /phone_numbers/1/edit
   def edit
   end
 
@@ -22,8 +20,6 @@ class PhoneNumbersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /phone_numbers/1
-  # PATCH/PUT /phone_numbers/1.json
   def update
     respond_to do |format|
       if @phone_number.update(phone_number_params)
@@ -36,8 +32,6 @@ class PhoneNumbersController < ApplicationController
     end
   end
 
-  # DELETE /phone_numbers/1
-  # DELETE /phone_numbers/1.json
   def destroy
     @phone_number.destroy
     respond_to do |format|
@@ -47,11 +41,7 @@ class PhoneNumbersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_phone_number
-      @phone_number = PhoneNumber.find(params[:id])
-    end
-
+    before_action :find_resource, only: [:edit, :update, :destroy]
     # Never trust parameters from the scary internet, only allow the white list through.
     def phone_number_params
       params.require(:phone_number).permit(:number, :contact_id, :contact_type)

@@ -1,5 +1,4 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
@@ -62,6 +61,7 @@ class PeopleController < ApplicationController
   end
 
   private
+    before_action :find_resource, only: [:show, :edit, :update, :destroy]
     # Use callbacks to share common setup or constraints between actions.
     def set_person
       @person = Person.find(params[:id])
