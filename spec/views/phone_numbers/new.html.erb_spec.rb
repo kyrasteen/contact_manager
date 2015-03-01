@@ -17,6 +17,8 @@ RSpec.describe "phone_numbers/new", type: :view do
       assert_select "input#phone_number_number[name=?]", "phone_number[number]"
 
       assert_select "input#phone_number_contact_id[name=?]", "phone_number[contact_id]"
+
+      assert_select "input#phone_number_contact_type[name=?]", "phone_number[contact_type]"
     end
   end
 end

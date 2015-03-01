@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EmailAddressesController, type: :controller do
 
   let(:valid_attributes) {
-    {address: 'kyra.steenbock@example.com', person_id: 1}
+    {address: 'kyra.steenbock@example.com', contact_id: 1, contact_type: "Person"}
   }
 
   let(:invalid_attributes) {
@@ -45,7 +45,7 @@ RSpec.describe EmailAddressesController, type: :controller do
 
   describe "POST #create" do
     let(:chris) { Person.create(first_name:'Chris', last_name:'Steenbock') }
-    let(:valid_attributes){ {address: 'cms@example.com', person_id: chris.id} }
+    let(:valid_attributes){ {address: 'cms@example.com', contact_id: chris.id, contact_type: "Person"} }
 
     context "with valid params" do
       it "creates a new EmailAddress" do
@@ -83,7 +83,7 @@ RSpec.describe EmailAddressesController, type: :controller do
 
     context "with valid params" do
       let(:chris) { Person.create(first_name:'Chris', last_name:'Steenbock') }
-      let(:valid_attributes){ {address: 'cms@example.com', person_id: chris.id} }
+      let(:valid_attributes){ {address: 'cms@example.com', contact_id: chris.id, contact_type: "Person"} }
       let(:new_attributes) {
         { address: 'newadd@example.com' }
       }
@@ -125,7 +125,7 @@ RSpec.describe EmailAddressesController, type: :controller do
 
   describe "DELETE #destroy" do
     let(:chris) { Person.create(first_name:"chris", last_name:"steenbock") }
-    let(:valid_attributes){ {address: 'cms@example.com', person_id: chris.id} }
+    let(:valid_attributes){ {address: 'cms@example.com', contact_id: chris.id, contact_type: "Person"} }
 
     it "destroys the requested email_address" do
       email_address = EmailAddress.create! valid_attributes
