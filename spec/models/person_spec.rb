@@ -15,11 +15,13 @@ RSpec.describe Person, type: :model do
     expect(person).not_to be_valid
   end
 
-  it "has an array of phone numbers" do
-    expect(person.phone_numbers).to eq([])
+  it "responds with its created phone numbers" do
+    person.phone_numbers.build(number: '4444444')
+    expect(person.phone_numbers.map(&:number)).to eq(["4444444"])
   end
 
   it "has an array of email addresses" do
-    expect(person.email_addresses).to eq([])
+    person.email_addresses.build(address: 'me@example.com')
+    expect(person.email_addresses.map(&:address)).to eq(["me@example.com"])
   end
 end
