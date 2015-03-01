@@ -1,9 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>name:</strong>
   <%= @company.name %>
 </p>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
+<ul>
+  <% @company.phone_numbers.each do |phone| %>
+    <li>
+      <%= phone.number %><%= link_to('Edit', edit_phone_number_path(phone)) %>
+      <%= link_to('Delete', phone_number_path(phone), :method => 'delete') %>
+    </li>
+    <% end %>
+</ul>
+<ul>
+  <% @company.email_addresses.each do |email| %>
+    <li>
+      <%= email.address %><%= link_to('Edit Email', edit_email_address_path(email)) %>
+      <%= link_to('Delete', email_address_path(email), :method => 'delete') %>
+    </li>
+    <% end %>
+</ul>
+
+
+<%= link_to 'Add Phone Number', new_phone_number_path(contact_id: @company.id, contact_type: "Company") %>
+<%= link_to 'Add Email Address', new_email_address_path(contact_id: @company.id, contact_type: "Company"), id: 'new_email_address' %>
+<%= link_to 'Edit', edit_company_path(@company) %>
 <%= link_to 'Back', companies_path %>
