@@ -16,4 +16,8 @@ RSpec.describe Company, type: :model do
     phone_number = company.phone_numbers.build(number: "3334433")
     expect(phone_number.number).to eq("3334433")
   end
+
+  it "convert to a string with name" do
+    expect(company.to_s).to eq "my company"
+  end
 end

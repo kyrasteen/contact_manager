@@ -15,6 +15,10 @@ RSpec.describe Person, type: :model do
     expect(person).not_to be_valid
   end
 
+  it "convert to a string with last name, first name" do
+    expect(person.to_s).to eq "Smith, Alice"
+  end
+
   it "responds with its created phone numbers" do
     person.phone_numbers.build(number: '4444444')
     expect(person.phone_numbers.map(&:number)).to eq(["4444444"])
